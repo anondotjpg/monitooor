@@ -42,7 +42,7 @@ function RotatingWord() {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % VARIABLE_WORDS.length);
-    }, 2200); // change word every 1.5s
+    }, 2200); // change word every 2.2s
 
     return () => clearInterval(interval);
   }, []);
@@ -406,7 +406,12 @@ export default function Home() {
                 <p className="text-sm font-semibold text-white md:text-base">
                   Bags Mobile
                 </p>
-                <p className="text-xs text-neutral-300 md:text-sm">
+                {/* Mobile: static "future" */}
+                <p className="text-xs text-neutral-300 md:hidden">
+                  Get funded for your future
+                </p>
+                {/* md+ : rotating word */}
+                <p className="hidden text-xs text-neutral-300 md:block md:text-sm">
                   Get funded for your <RotatingWord />
                 </p>
                 <p className="mt-0.5 text-[11px] text-neutral-500 md:text-xs">
