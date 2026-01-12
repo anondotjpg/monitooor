@@ -223,7 +223,7 @@ export default function Home() {
             pointer-events-none
             absolute inset-x-0 bottom-0
             z-0
-            opacity-20
+            opacity-25
             transform-gpu translate-y-10
           "
         >
