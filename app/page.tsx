@@ -7,6 +7,7 @@ import { motion, type MotionProps } from "motion/react";
 import Marquee from "react-fast-marquee";
 import { DottedMap } from "./components/DottedMap";
 import { Iphone } from "./components/Iphone";
+import { MarqueeCard, MarqueeToken } from "./components/MarqueeCard";
 
 const shinyAnimationProps: MotionProps = {
   initial: { "--x": "100%" },
@@ -30,6 +31,50 @@ const shinyAnimationProps: MotionProps = {
 } as MotionProps;
 
 const EARNINGS_START = 21_000_000;
+
+// 🔹 Marquee token JSON you can customize
+const MARQUEE_TOKENS: MarqueeToken[] = [
+  {
+    id: 1,
+    name: "Ralph Wiggum",
+    symbol: "RALPH",
+    tokenImage: "/t1.webp",
+    feeEarnerUsername: "GeoffreyHuntley",
+    feeEarnerAvatar: "/c1.webp",
+  },
+  {
+    id: 2,
+    name: "Vibe Virtual Machine",
+    symbol: "VVM",
+    tokenImage: "/z.webp",
+    feeEarnerUsername: "thekaranchawla",
+    feeEarnerAvatar: "/c2.webp",
+  },
+  {
+    id: 3,
+    name: "Nyan Cat",
+    symbol: "NYAN",
+    tokenImage: "/t3.webp",
+    feeEarnerUsername: "PRguitarman",
+    feeEarnerAvatar: "/c3.webp",
+  },
+  {
+    id: 4,
+    name: "Natecoin",
+    symbol: "NATE",
+    tokenImage: "/t4.webp",
+    feeEarnerUsername: "Nate_Esparza",
+    feeEarnerAvatar: "/c4.webp",
+  },
+  {
+    id: 5,
+    name: "Claude Memory",
+    symbol: "CMEM",
+    tokenImage: "/t5.webp",
+    feeEarnerUsername: "Claude_Memory",
+    feeEarnerAvatar: "/c5.webp",
+  },
+];
 
 export default function Home() {
   const earningsSpanRef = useRef<HTMLSpanElement | null>(null);
@@ -161,7 +206,6 @@ export default function Home() {
       </header>
 
       {/* HERO */}
-      {/* note: overflow-x-hidden so vertical decoration won't get clipped */}
       <section className="relative flex items-center justify-center px-6 py-16 overflow-hidden">
         {/* Dotted map background at bottom */}
         <div
@@ -240,24 +284,23 @@ export default function Home() {
         </p>
 
         {/* Full-width marquee behind iPhone (react-fast-marquee) */}
-        <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 z-0 overflow-hidden blur-[0.5px]">
-          <Marquee
-            gradient={false}
-            speed={40}
-            pauseOnHover={false}
-          >
-            {Array.from({ length: 16 }).map((_, i) => (
-              <div
-                key={i}
-                className="h-60 w-80 flex-shrink-0 rounded-2xl bg-[#141414] border border-white/10 mr-4"
-              />
-            ))}
+        <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 z-0 overflow-hidden blur-[0.5px] invisible md:visible">
+          <Marquee gradient={false} speed={40} pauseOnHover={false}>
+            {Array.from({ length: 3 }).flatMap((_, loopIndex) =>
+              MARQUEE_TOKENS.map((token) => (
+                <MarqueeCard
+                  key={`${loopIndex}-${token.id}`}
+                  token={token}
+                  className="mr-4"
+                />
+              ))
+            )}
           </Marquee>
         </div>
 
         {/* iPhone on top, centered - with fade elements behind */}
         <div className="relative z-20 w-[320px] md:w-[434px]">
-          {/* Left fade gradient - smooth from solid → transparent */}
+          {/* Left fade gradient */}
           <div
             className="pointer-events-none absolute top-0 h-full w-[75px] -z-10"
             style={{
@@ -266,7 +309,7 @@ export default function Home() {
                 "linear-gradient(to left, rgba(5,5,7,1) 0%, rgba(5,5,7,0.7) 30%, rgba(5,5,7,0.4) 60%, rgba(5,5,7,0) 100%)",
             }}
           />
-          {/* Right fade gradient - smooth from solid → transparent */}
+          {/* Right fade gradient */}
           <div
             className="pointer-events-none absolute top-0 h-full w-[75px] -z-10"
             style={{
