@@ -265,22 +265,22 @@ export default function Home() {
 
         {/* iPhone on top, centered - with fade elements behind */}
         <div className="relative z-20 w-[320px] md:w-[434px]">
-          {/* Left fade gradient - behind iPhone, 95% width */}
+          {/* Left fade gradient - smooth from solid → transparent */}
           <div
-            className="pointer-events-none absolute top-0 h-full w-[75%] bg-[#050507] -z-10"
+            className="pointer-events-none absolute top-0 h-full w-[75px] -z-10"
             style={{
               right: "90%",
-              maskImage: "linear-gradient(to right, transparent, black)",
-              WebkitMaskImage: "linear-gradient(to right, transparent, black)",
+              background:
+                "linear-gradient(to left, rgba(5,5,7,1) 0%, rgba(5,5,7,0.7) 30%, rgba(5,5,7,0.4) 60%, rgba(5,5,7,0) 100%)",
             }}
           />
-          {/* Right fade gradient - behind iPhone, 95% width */}
+          {/* Right fade gradient - smooth from solid → transparent */}
           <div
-            className="pointer-events-none absolute top-0 h-full w-[75%] bg-[#050507] -z-10"
+            className="pointer-events-none absolute top-0 h-full w-[75px] -z-10"
             style={{
               left: "90%",
-              maskImage: "linear-gradient(to left, transparent, black)",
-              WebkitMaskImage: "linear-gradient(to left, transparent, black)",
+              background:
+                "linear-gradient(to right, rgba(5,5,7,1) 0%, rgba(5,5,7,0.7) 30%, rgba(5,5,7,0.4) 60%, rgba(5,5,7,0) 100%)",
             }}
           />
           <Iphone src="flex3.png" />
