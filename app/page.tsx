@@ -233,11 +233,56 @@ export default function Home() {
       </section>
 
       {/* iPhone mockup under hero */}
-      <section className="flex flex-col items-center px-6 pb-16">
+      <section className="relative flex flex-col items-center px-6 pb-16 overflow-hidden">
         <p className="mb-4 text-xs tracking-wider text-neutral-700">
           you are clicks away from this
         </p>
-        <div className="w-[320px] md:w-108.5">
+
+        {/* Full-width marquee behind iPhone */}
+        <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 z-0 overflow-hidden blur-[0.5px]">
+          <motion.div
+            className="flex"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 18,
+              ease: "linear",
+            }}
+          >
+            {[0, 1].map((copyIndex) => (
+              <div key={copyIndex} className="flex">
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <div
+                    key={`${copyIndex}-${i}`}
+                    className="h-60 w-80 flex-shrink-0 rounded-2xl bg-[#141414] border border-white/10 mr-4"
+                  />
+                ))}
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* iPhone on top, centered - with fade elements behind */}
+        <div className="relative z-20 w-[320px] md:w-[434px]">
+          {/* Left fade gradient - behind iPhone, 95% width */}
+          <div
+            className="pointer-events-none absolute top-0 h-full w-[75%] bg-[#050507] -z-10"
+            style={{
+              right: "90%",
+              maskImage: "linear-gradient(to right, transparent, black)",
+              WebkitMaskImage: "linear-gradient(to right, transparent, black)",
+            }}
+          />
+          {/* Right fade gradient - behind iPhone, 95% width */}
+          <div
+            className="pointer-events-none absolute top-0 h-full w-[75%] bg-[#050507] -z-10"
+            style={{
+              left: "90%",
+              maskImage: "linear-gradient(to left, transparent, black)",
+              WebkitMaskImage: "linear-gradient(to left, transparent, black)",
+            }}
+          />
           <Iphone src="flex3.png" />
         </div>
       </section>
