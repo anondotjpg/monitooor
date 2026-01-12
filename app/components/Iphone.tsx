@@ -49,9 +49,22 @@ export function Iphone({
       }}
       {...props}
     >
+      {/* 🔳 Solid black backing for the screen so nothing leaks through */}
+      <div
+        className="pointer-events-none absolute z-0"
+        style={{
+          left: `${LEFT_PCT}%`,
+          top: `${TOP_PCT}%`,
+          width: `${WIDTH_PCT}%`,
+          height: `${HEIGHT_PCT}%`,
+          borderRadius: `${RADIUS_H}% / ${RADIUS_V}%`,
+          backgroundColor: "#000000",
+        }}
+      />
+
       {hasVideo && (
         <div
-          className="pointer-events-none absolute z-0 overflow-hidden"
+          className="pointer-events-none absolute z-10 overflow-hidden"
           style={{
             left: `${LEFT_PCT}%`,
             top: `${TOP_PCT}%`,
@@ -74,7 +87,7 @@ export function Iphone({
 
       {!hasVideo && src && (
         <div
-          className="pointer-events-none absolute z-0 overflow-hidden"
+          className="pointer-events-none absolute z-10 overflow-hidden"
           style={{
             left: `${LEFT_PCT}%`,
             top: `${TOP_PCT}%`,
