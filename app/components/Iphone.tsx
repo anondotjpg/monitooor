@@ -16,14 +16,17 @@ const HEIGHT_PCT = (SCREEN_HEIGHT / PHONE_HEIGHT) * 100
 const RADIUS_H = (SCREEN_RADIUS / SCREEN_WIDTH) * 100
 const RADIUS_V = (SCREEN_RADIUS / SCREEN_HEIGHT) * 100
 
+// Extra padding so backing slightly overlaps under edges
+const BACKING_PAD_PCT = 0.8 // tweak if needed
+
 // Dark mode palette to match your hero
-const SHELL_EDGE = "#050507"      // outer body (matches page bg)
-const SHELL_SIDE = "#0B0B0D"      // side rails / subtle contrast
-const SHELL_INNER = "#141414"     // inner frame (like your search bar)
-const SHELL_ACCENT = "#1F1F23"    // small accents / top bar
-const SCREEN_BORDER = "#202020"   // border around screen
-const SENSOR_BG = "#141414"       // notch background
-const SENSOR_INNER = "#262626"    // camera ring
+const SHELL_EDGE = "#050507"
+const SHELL_SIDE = "#0B0B0D"
+const SHELL_INNER = "#141414"
+const SHELL_ACCENT = "#1F1F23"
+const SCREEN_BORDER = "#202020"
+const SENSOR_BG = "#141414"
+const SENSOR_INNER = "#262626"
 
 export interface IphoneProps extends HTMLAttributes<HTMLDivElement> {
   src?: string
@@ -49,15 +52,17 @@ export function Iphone({
       }}
       {...props}
     >
-      {/* 🔳 Solid black backing for the screen so nothing leaks through */}
+      {/* 🔳 Solid black backing, slightly oversized so nothing leaks through */}
       <div
         className="pointer-events-none absolute z-0"
         style={{
-          left: `${LEFT_PCT}%`,
-          top: `${TOP_PCT}%`,
-          width: `${WIDTH_PCT}%`,
-          height: `${HEIGHT_PCT}%`,
-          borderRadius: `${RADIUS_H}% / ${RADIUS_V}%`,
+          left: `calc(${LEFT_PCT}% - ${BACKING_PAD_PCT}%)`,
+          top: `calc(${TOP_PCT}% - ${BACKING_PAD_PCT}%)`,
+          width: `calc(${WIDTH_PCT}% + ${BACKING_PAD_PCT * 2}%)`,
+          height: `calc(${HEIGHT_PCT}% + ${BACKING_PAD_PCT * 2}%)`,
+          borderRadius: `${RADIUS_H + BACKING_PAD_PCT}% / ${
+            RADIUS_V + BACKING_PAD_PCT
+          }%`,
           backgroundColor: "#000000",
         }}
       />
@@ -117,7 +122,7 @@ export function Iphone({
             d="M2 73C2 32.6832 34.6832 0 75 0H357C397.317 0 430 32.6832 430 73V809C430 849.317 397.317 882 357 882H75C34.6832 882 2 849.317 2 809V73Z"
             fill={SHELL_EDGE}
           />
-          {/* Left side buttons background (subtle side rail) */}
+          {/* Left side buttons */}
           <path
             d="M0 171C0 170.448 0.447715 170 1 170H3V204H1C0.447715 204 0 203.552 0 203V171Z"
             fill={SHELL_SIDE}
@@ -177,8 +182,8 @@ export function Iphone({
         <defs>
           <mask id="screenPunch" maskUnits="userSpaceOnUse">
             <rect
-              x="0"
-              y="0"
+              x={0}
+              y={0}
               width={PHONE_WIDTH}
               height={PHONE_HEIGHT}
               fill="white"
@@ -193,16 +198,6 @@ export function Iphone({
               fill="black"
             />
           </mask>
-          <clipPath id="roundedCorners">
-            <rect
-              x={SCREEN_X}
-              y={SCREEN_Y}
-              width={SCREEN_WIDTH}
-              height={SCREEN_HEIGHT}
-              rx={SCREEN_RADIUS}
-              ry={SCREEN_RADIUS}
-            />
-          </clipPath>
         </defs>
       </svg>
     </div>
