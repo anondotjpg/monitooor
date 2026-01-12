@@ -274,7 +274,7 @@ export default function Home() {
             </div>
 
             {/* Avatar circles – top-right of pill, md+ only */}
-            <div className="pointer-events-auto absolute -right-5 -top-6 hidden md:block">
+            <div className="pointer-events-auto absolute -right-6 -top-6 hidden md:block">
               <AvatarCircles
                 numPeople={MARQUEE_TOKENS.length}
                 avatarUrls={AVATAR_URLS}
