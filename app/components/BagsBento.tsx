@@ -333,7 +333,7 @@ const BuyTradeSkeleton = () => {
               token.changeDisplay.trim().startsWith("-");
             const changeColor = isNegative
               ? "text-red-400"
-              : "text-emerald-400";
+              : "text-[#02FF40]";
 
             return (
               <div
