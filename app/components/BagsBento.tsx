@@ -176,7 +176,7 @@ const LaunchSkeleton = () => {
           />
         </div>
         <p className="mt-3 text-center text-xs font-semibold text-neutral-300">
-          Chat already going feral.
+          Chat already going insane.
         </p>
         <p className={chipBase}>Live</p>
       </motion.div>
