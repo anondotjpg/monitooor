@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, type CSSProperties } from "react";
 import Image from "next/image";
 import { BentoGrid, BentoGridItem } from "./Bento";
 import {
@@ -59,7 +59,16 @@ const LaunchSkeleton = () => {
           className="absolute top-4 left-7 flex items-center"
         >
           <span className="text-[14px] font-semibold text-[#02FF40]">+</span>
-          {isHovered && <NumberTicker value={124} startValue={0} direction="up" delay={0} decimalPlaces={0} className="text-[14px] font-semibold text-[#02FF40]" />}
+          {isHovered && (
+            <NumberTicker
+              value={124}
+              startValue={0}
+              direction="up"
+              delay={0}
+              decimalPlaces={0}
+              className="text-[14px] font-semibold text-[#02FF40]"
+            />
+          )}
           <span className="text-[14px] font-semibold text-[#02FF40]">%</span>
         </motion.div>
 
@@ -70,7 +79,16 @@ const LaunchSkeleton = () => {
           className="absolute top-5 right-5 flex items-center"
         >
           <span className="text-[14px] font-semibold text-[#02FF40]">+</span>
-          {isHovered && <NumberTicker value={89} startValue={0} direction="up" delay={0.05} decimalPlaces={0} className="text-[14px] font-semibold text-[#02FF40]" />}
+          {isHovered && (
+            <NumberTicker
+              value={89}
+              startValue={0}
+              direction="up"
+              delay={0.05}
+              decimalPlaces={0}
+              className="text-[14px] font-semibold text-[#02FF40]"
+            />
+          )}
           <span className="text-[14px] font-semibold text-[#02FF40]">%</span>
         </motion.div>
 
@@ -81,7 +99,16 @@ const LaunchSkeleton = () => {
           className="absolute bottom-4 left-5 flex items-center"
         >
           <span className="text-[14px] font-semibold text-[#02FF40]">+</span>
-          {isHovered && <NumberTicker value={247} startValue={0} direction="up" delay={0.1} decimalPlaces={0} className="text-[14px] font-semibold text-[#02FF40]" />}
+          {isHovered && (
+            <NumberTicker
+              value={247}
+              startValue={0}
+              direction="up"
+              delay={0.1}
+              decimalPlaces={0}
+              className="text-[14px] font-semibold text-[#02FF40]"
+            />
+          )}
           <span className="text-[14px] font-semibold text-[#02FF40]">%</span>
         </motion.div>
 
@@ -92,7 +119,16 @@ const LaunchSkeleton = () => {
           className="absolute bottom-4 right-5 flex items-center"
         >
           <span className="text-[14px] font-semibold text-[#02FF40]">+</span>
-          {isHovered && <NumberTicker value={56} startValue={0} direction="up" delay={0.15} decimalPlaces={0} className="text-[14px] font-semibold text-[#02FF40]" />}
+          {isHovered && (
+            <NumberTicker
+              value={56}
+              startValue={0}
+              direction="up"
+              delay={0.15}
+              decimalPlaces={0}
+              className="text-[14px] font-semibold text-[#02FF40]"
+            />
+          )}
           <span className="text-[14px] font-semibold text-[#02FF40]">%</span>
         </motion.div>
 
@@ -293,7 +329,7 @@ const JoinChatSkeleton = () => {
 };
 
 /* =========================================================
-   BUY & TRADE: vertical hover-to-play loop using MARQUEE_TOKENS
+   BUY & TRADE: vertical marquee (loops by default, pauses on hover)
    ========================================================= */
 
 const MARQUEE_TOKENS = [
@@ -355,28 +391,29 @@ const MARQUEE_TOKENS = [
 ];
 
 const BuyTradeSkeleton = () => {
-  const [hover, setHover] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Duplicate list so we can scroll -50% for a seamless loop
   const loopList = [...MARQUEE_TOKENS, ...MARQUEE_TOKENS];
 
+  const marqueeStyle: CSSProperties = {
+    animation: "bags-vertical-marquee 18s linear infinite",
+    animationPlayState: isPaused ? "paused" : "running",
+    willChange: "transform",
+  };
+
   return (
-    <motion.div
-      onHoverStart={() => setHover(true)}
-      onHoverEnd={() => setHover(false)}
+    <div
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
       className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-xl bg-neutral-900/70"
     >
+      {/* Top & bottom fade */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-[#050507] to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#050507] to-transparent" />
 
       <div className="relative h-full w-full overflow-hidden px-3 py-2">
-        <motion.div
-          className="flex flex-col gap-[3px]"
-          animate={hover ? { y: ["0%", "-50%"] } : { y: 0 }}
-          transition={
-            hover
-              ? { duration: 14, repeat: Infinity, ease: "linear" }
-              : { duration: 0.3, ease: "easeOut" }
-          }
-        >
+        <div className="flex flex-col gap-[3px]" style={marqueeStyle}>
           {loopList.map((token, idx) => {
             const isNegative =
               token.changeDisplay &&
@@ -434,9 +471,9 @@ const BuyTradeSkeleton = () => {
               </div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -482,17 +519,31 @@ const BENTO_ITEMS = [
 
 export function BagsBento() {
   return (
-    <BentoGrid className="mx-auto max-w-5xl md:auto-rows-[20rem]">
-      {BENTO_ITEMS.map((item, i) => (
-        <BentoGridItem
-          key={i}
-          title={item.title}
-          description={item.description}
-          header={item.header}
-          className={item.className}
-          icon={item.icon}
-        />
-      ))}
-    </BentoGrid>
+    <>
+      <BentoGrid className="mx-auto max-w-5xl md:auto-rows-[20rem]">
+        {BENTO_ITEMS.map((item, i) => (
+          <BentoGridItem
+            key={i}
+            title={item.title}
+            description={item.description}
+            header={item.header}
+            className={item.className}
+            icon={item.icon}
+          />
+        ))}
+      </BentoGrid>
+
+      {/* Global keyframes for the vertical marquee */}
+      <style jsx global>{`
+        @keyframes bags-vertical-marquee {
+          0% {
+            transform: translate3d(0, 0, 0);
+          }
+          100% {
+            transform: translate3d(0, -50%, 0);
+          }
+        }
+      `}</style>
+    </>
   );
 }
