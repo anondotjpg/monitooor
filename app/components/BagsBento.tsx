@@ -58,9 +58,9 @@ const LaunchSkeleton = () => {
           transition={{ duration: 0.2 }}
           className="absolute top-4 left-7 flex items-center"
         >
-          <span className="text-[11px] font-semibold text-[#02FF40]">+</span>
-          {isHovered && <NumberTicker value={124} startValue={0} direction="up" delay={0} decimalPlaces={0} className="text-[11px] font-semibold text-[#02FF40]" />}
-          <span className="text-[11px] font-semibold text-[#02FF40]">%</span>
+          <span className="text-[14px] font-semibold text-[#02FF40]">+</span>
+          {isHovered && <NumberTicker value={124} startValue={0} direction="up" delay={0} decimalPlaces={0} className="text-[14px] font-semibold text-[#02FF40]" />}
+          <span className="text-[14px] font-semibold text-[#02FF40]">%</span>
         </motion.div>
 
         <motion.div
@@ -69,20 +69,20 @@ const LaunchSkeleton = () => {
           transition={{ duration: 0.2, delay: 0.05 }}
           className="absolute top-5 right-5 flex items-center"
         >
-          <span className="text-[11px] font-semibold text-[#02FF40]">+</span>
-          {isHovered && <NumberTicker value={89} startValue={0} direction="up" delay={0.05} decimalPlaces={0} className="text-[11px] font-semibold text-[#02FF40]" />}
-          <span className="text-[11px] font-semibold text-[#02FF40]">%</span>
+          <span className="text-[14px] font-semibold text-[#02FF40]">+</span>
+          {isHovered && <NumberTicker value={89} startValue={0} direction="up" delay={0.05} decimalPlaces={0} className="text-[14px] font-semibold text-[#02FF40]" />}
+          <span className="text-[14px] font-semibold text-[#02FF40]">%</span>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: isHovered ? 1 : 0 }}
           transition={{ duration: 0.2, delay: 0.1 }}
-          className="absolute bottom-4 left-7 flex items-center"
+          className="absolute bottom-4 left-5 flex items-center"
         >
-          <span className="text-[11px] font-semibold text-[#02FF40]">+</span>
-          {isHovered && <NumberTicker value={247} startValue={0} direction="up" delay={0.1} decimalPlaces={0} className="text-[11px] font-semibold text-[#02FF40]" />}
-          <span className="text-[11px] font-semibold text-[#02FF40]">%</span>
+          <span className="text-[14px] font-semibold text-[#02FF40]">+</span>
+          {isHovered && <NumberTicker value={247} startValue={0} direction="up" delay={0.1} decimalPlaces={0} className="text-[14px] font-semibold text-[#02FF40]" />}
+          <span className="text-[14px] font-semibold text-[#02FF40]">%</span>
         </motion.div>
 
         <motion.div
@@ -91,9 +91,9 @@ const LaunchSkeleton = () => {
           transition={{ duration: 0.2, delay: 0.15 }}
           className="absolute bottom-4 right-5 flex items-center"
         >
-          <span className="text-[11px] font-semibold text-[#02FF40]">+</span>
-          {isHovered && <NumberTicker value={56} startValue={0} direction="up" delay={0.15} decimalPlaces={0} className="text-[11px] font-semibold text-[#02FF40]" />}
-          <span className="text-[11px] font-semibold text-[#02FF40]">%</span>
+          <span className="text-[14px] font-semibold text-[#02FF40]">+</span>
+          {isHovered && <NumberTicker value={56} startValue={0} direction="up" delay={0.15} decimalPlaces={0} className="text-[14px] font-semibold text-[#02FF40]" />}
+          <span className="text-[14px] font-semibold text-[#02FF40]">%</span>
         </motion.div>
 
         <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-white/12 bg-neutral-900">
