@@ -291,8 +291,21 @@ export default function Home() {
 
       {/* HERO */}
       <section className="relative flex items-center justify-center overflow-hidden px-6 py-32">
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 translate-y-16 transform-gpu opacity-25">
-          <DottedMap className="h-full w-full" dotRadius={0.15} />
+        {/* HERO floor background (replaces DottedMap) */}
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <DitherShader
+            src="floor.webp"
+            gridSize={3}
+            ditherMode="bayer"
+            colorMode="grayscale"
+            className="h-full w-full"
+          />
+
+          {/* overall darken */}
+          <div className="absolute inset-0 bg-[#050507]/75" />
+
+          {/* flipped gradient (fade INTO bottom) */}
+          <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#050507]/35 to-[#050507]" />
         </div>
 
         <div className="z-10 -mt-16 max-w-3xl text-center">
