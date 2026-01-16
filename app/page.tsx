@@ -203,11 +203,10 @@ const VideoBackground = memo(function VideoBackground() {
       <video
         ref={videoRef}
         className="absolute inset-0 h-full w-full object-cover"
-        src="/wall.webm"
+        src="/wall.mp4"
         muted
         loop
         playsInline
-        preload="none" // Don't preload - saves memory
       />
       <div className="absolute inset-0 bg-black/75" />
     </div>
